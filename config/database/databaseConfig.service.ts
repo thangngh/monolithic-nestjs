@@ -11,12 +11,12 @@ export default class DatabaseConfigService implements TypeOrmOptionsFactory {
       type: 'postgres',
       host: this.config.get<string>('database.host'),
       port: this.config.get<number>('database.port'),
-      username: this.config.get<string>('database.user'),
+      username: this.config.get<string>('database.username'),
       password: this.config.get<string>('database.password'),
       database: this.config.get<string>('database.database'),
       entities: [__dirname + '/../**/*.entity{.ts,.js}'],
       synchronize: false,
-      autoLoadEntities: false,
+      autoLoadEntities: true,
     };
   }
 }

@@ -1,3 +1,29 @@
-version: 3.2
+version: '3.2'
 services:
-  
+  db:
+    image: postgres:14
+    container_name: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-example_postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-example_password}
+      POSTGRES_DB: ${POSTGRES_DB:-example_db}
+    ports:
+      - "5432:5432"
+    volumes:
+      # - ./services-data/db/data:/var/lib/postgresql/data
+      - db_data:/var/lib/postgresql/data
+    networks:
+      - db_network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-example_postgres} -d ${POSTGRES_DB:-example_db}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+networks:
+  db_network:
+    driver: bridge
+volumes:
+  db_data:
+    driver: local

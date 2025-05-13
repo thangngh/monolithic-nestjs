@@ -1,30 +1,3 @@
-// import { LoggerModule } from 'nestjs-pino';
-// import { Module } from '@nestjs/common';
-// import { ConfigModule, ConfigService } from '@nestjs/config';
-
-// @Module({
-//   imports: [
-//     LoggerModule.forRootAsync({
-//       imports: [ConfigModule],
-//       useFactory: async (configService: ConfigService) => {
-//         return {
-//           pinoHttp: {
-//             transport: configService.get('loggerConfig.transport'),
-//             level: configService.get('loggerConfig.level'),
-//             formatters: {
-//               level(label: string) {
-//                 return { level: label };
-//               },
-//             },
-//           },
-//         };
-//       },
-//       inject: [ConfigService],
-//     }),
-//   ],
-//   exports: [],
-// })
-// export default class LogModules {}
 import { DynamicModule, Module, Global, Provider } from '@nestjs/common';
 
 import { LoggerService } from './logger.service';
@@ -36,11 +9,13 @@ import {
   LoggerOptionsFactory,
 } from './logger.interface';
 import { LOGGER_MODULE_OPTIONS } from './logger.constants';
+import { FileLoggerStrategy } from 'shared/strategies/file.strategy';
+import { ThirdPartyLoggerStrategy } from 'shared/strategies/third-party.strategy';
 
 @Global()
 @Module({
   imports: [TypeOrmModule.forFeature([LoggerSettingsEntity])],
-  providers: [LoggerService],
+  providers: [LoggerService, FileLoggerStrategy, ThirdPartyLoggerStrategy],
   exports: [LoggerService],
 })
 export class LoggerModule {

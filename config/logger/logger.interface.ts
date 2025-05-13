@@ -2,7 +2,7 @@ import { ModuleMetadata, Type } from '@nestjs/common';
 import { LoggerMode } from './logger.constants';
 
 export interface LoggerModuleOptions {
-  mode?: LoggerMode; // optional để có thể lấy từ database
+  mode?: LoggerMode;
   appName?: string;
   level?: string;
   thirdPartyOptions?: Record<string, any>;
@@ -10,8 +10,8 @@ export interface LoggerModuleOptions {
     destination?: string;
     syncWrite?: boolean;
   };
-  useDatabase?: boolean; // flag để xác định có lấy cấu hình từ database hay không
-  refreshInterval?: number; // khoảng thời gian (ms) để làm mới cấu hình từ database
+  useDatabase?: boolean;
+  refreshInterval?: number;
 }
 
 export interface LoggerOptionsFactory {

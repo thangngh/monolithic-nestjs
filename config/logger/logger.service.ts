@@ -6,7 +6,6 @@ import {
 } from '@nestjs/common';
 
 import { ModuleRef } from '@nestjs/core';
-// import { Interval } from '@nestjs/schedule';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { LOGGER_MODULE_OPTIONS, LoggerMode } from './logger.constants';
@@ -19,7 +18,7 @@ import { LoggerModuleOptions, LoggerStrategy } from './logger.interface';
 export class LoggerService implements NestLoggerService, OnModuleInit {
   private logger: any;
   private readonly strategies = new Map<LoggerMode, LoggerStrategy>();
-  private currentMode: LoggerMode = LoggerMode.FILE; // Mặc định là FILE
+  private currentMode: LoggerMode = LoggerMode.FILE;
 
   constructor(
     @Inject(LOGGER_MODULE_OPTIONS)
@@ -32,7 +31,7 @@ export class LoggerService implements NestLoggerService, OnModuleInit {
   }
 
   async onModuleInit() {
-    await this.loadConfigFromDatabase();
+    // await this.loadConfigFromDatabase();
 
     this.createLogger();
   }

@@ -3,18 +3,16 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { I18nConfigModule } from 'config/i18n/i18n-config.module';
 import { ConfigModule } from '@nestjs/config';
-import config from '@config/env';
 import DatabaseModule from '@config/database/database.module';
 import { LoggerModule } from '@config/logger/logger.module';
 import { LoggerMode } from '@config/logger/logger.constants';
 import { LoggerMiddleware } from 'shared/middlewares/logger.middleware';
-
+import database from '../config/env/database';
 @Module({
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
-      load: config,
-      cache: true,
+      load: [database],
     }),
     I18nConfigModule,
     DatabaseModule,

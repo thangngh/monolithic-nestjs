@@ -9,9 +9,8 @@ import pino from 'pino';
 @Injectable()
 export class ThirdPartyLoggerStrategy implements LoggerStrategy {
   createLogger(options: LoggerModuleOptions): any {
-
     const thirdPartyTransport = pino.transport({
-      target: 'pino-pretty', 
+      target: 'pino-pretty',
       options: {
         ...options.thirdPartyOptions,
       },
