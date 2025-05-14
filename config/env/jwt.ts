@@ -5,4 +5,8 @@ export default registerAs('jwt', () => ({
   signOptions: {
     expiresIn: process.env.JWT_EXPIRES_IN,
   },
+  refreshSecret: process.env.JWT_REFRESH_SECRET,
+  refreshSignOptions: {
+    expiresIn: process.env.JWT_REFRESH_EXPIRES_IN,
+  },
 }));

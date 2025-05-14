@@ -7,6 +7,8 @@ import DatabaseModule from '@config/database/database.module';
 import { LoggerModule } from '@config/logger/logger.module';
 import { LoggerMode } from '@config/logger/logger.constants';
 import { LoggerMiddleware } from 'shared/middlewares/logger.middleware';
+import { AuthModule } from './auth/auth.module';
+import { UserModule } from './modules/user/user.module';
 import database from '../config/env/database';
 @Module({
   imports: [
@@ -30,6 +32,8 @@ import database from '../config/env/database';
       //   @Todo: 'Configure third-party logger options',
       // }
     }),
+    AuthModule,
+    UserModule,
   ],
   controllers: [AppController],
   providers: [AppService],
